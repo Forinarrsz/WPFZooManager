@@ -111,7 +111,7 @@ namespace WPFZooManager
                 sqlConnection.Open();
                 sqlCommand.Parameters.AddWithValue("@ZooId", listZoos.SelectedValue);
                 sqlCommand.ExecuteScalar();
-            } catch (Exception ex) { Console.WriteLine(ex); } // в этом месте метод работает, но вызывает ошибку, поэтому MessageBox заменён на CW
+            } catch (Exception ex) { MessageBox.Show(ex.Message); } 
             finally { sqlConnection.Close(); ShowZoos(); }
         }
 
@@ -206,12 +206,12 @@ namespace WPFZooManager
             finally { sqlConnection.Close(); ShowZoos(); }
 
         }
-
+        /*
         private void RemoveAnimalFromZoo_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string query = "delete from Zoo where ZooId = @ZooId AND AnimalId = @AnimalId";
+                string query = "delete from Zoo where ZooId = @ZooId and AnimalId = @AnimalId";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlConnection.Open();
                 sqlCommand.Parameters.AddWithValue("@ZooId", listZoos.SelectedValue);
@@ -225,8 +225,49 @@ namespace WPFZooManager
             {
                 sqlConnection.Close();
                 ShowAssociatedAnimals();
-            }
+            }*/
+        /*
+        private void RemoveAnimalFromZoo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = "delete from Zoo where AnimalId = @AnimalId";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
 
-        }
+                sqlCommand.Parameters.AddWithValue("@AnimalId", listAssociatedAnimals.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowAssociatedAnimals();
+            }
+            */
+        /*
+        private void RemoveAnimalFromZoo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = "delete from ZooAnimal where AnimalId = @AnimalId";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+
+                sqlCommand.Parameters.AddWithValue("@AnimalId", listAssociatedAnimals.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowAssociatedAnimals();
+            }
+        }*/
+        //Пробую по - разному, не получается реализовать метод. При нажатии на кнопку, ничего не происходит
     }
 }
