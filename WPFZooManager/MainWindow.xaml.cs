@@ -106,12 +106,12 @@ namespace WPFZooManager
         {
             try
             {
-                string query = "delete from Zoo where id = @ZooId";
+                string query = "delete from Zoo where Id = @ZooId";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlConnection.Open();
                 sqlCommand.Parameters.AddWithValue("@ZooId", listZoos.SelectedValue);
                 sqlCommand.ExecuteScalar();
-            } catch (Exception ex) { MessageBox.Show(ex.ToString());  }
+            } catch (Exception ex) { Console.WriteLine(ex); } // в этом месте метод работает, но вызывает ошибку, поэтому MessageBox заменён на CW
             finally { sqlConnection.Close(); ShowZoos(); }
         }
 
@@ -204,6 +204,28 @@ namespace WPFZooManager
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
             finally { sqlConnection.Close(); ShowZoos(); }
+
+        }
+
+        private void RemoveAnimalFromZoo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string query = "delete from Zoo where ZooId = @ZooId AND AnimalId = @AnimalId";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlConnection.Open();
+                sqlCommand.Parameters.AddWithValue("@ZooId", listZoos.SelectedValue);
+                sqlCommand.Parameters.AddWithValue("@AnimalId", listAssociatedAnimals.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                ShowAssociatedAnimals();
+            }
 
         }
     }

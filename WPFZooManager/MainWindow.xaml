@@ -62,6 +62,7 @@
             Background="Lavender"/>
         
         <Button Content="Remove Animal 🗑️"
+                Click="RemoveAnimalFromZoo_Click"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Width="158" Height="34"
